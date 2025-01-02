@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"time"
 )
 
@@ -26,7 +27,7 @@ func mainWorker() {
 		go worker(w, jobs, results)
 	}
 
-	//  5 jobs to jobs channel
+	// 5 jobs to jobs channel
 	for j := 1; j <= numJobs; j++ {
 		jobs <- j
 	}
@@ -34,11 +35,27 @@ func mainWorker() {
 
 	// collecting results channel
 	for a := 1; a <= numJobs; a++ {
-		<-results
+		result := <-results
+		log.Printf("Result received: %d\n", result)
 	}
+}
+
+// error handling
+func simulateErrorHandling() {
+	defer func() {
+		if r := recover(); r != nil {
+			log.Printf("Recovered from error: %v\n", r)
+		}
+	}()
+
+	panic("simulated error")
 }
 
 // main func starts mainWorker func
 func main() {
+	fmt.Println("Starting mainWorker")
 	mainWorker()
+
+	fmt.Println("Simulating error handling")
+	simulateErrorHandling()
 }
