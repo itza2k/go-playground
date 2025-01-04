@@ -39,12 +39,12 @@ func (m Motorcycle) TopSpeed() int {
 
 func main() {
 	bike := Motorcycle{
-		Brand:    "Yamaha",
-		Model:    "MT-15",
-		CC:       155,
-		Category: "Naked",
-		MaxSpeed: 140,
-		HasABS:   true,
+		Brand:"Yamaha",
+		Model:"MT-15",
+		CC:155,
+		Category:"Naked",
+		MaxSpeed:140,
+		HasABS:true,
 	}
 
 	fmt.Println(bike.RevEngine())
